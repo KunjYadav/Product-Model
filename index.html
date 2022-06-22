@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>LIST OF PRODUCTS</h1>
+  <div id="products"> </div>
+  <button onclick="showAllProducts()">show all products</button>
+  <!-- <input id="productId" type="text"></input>
+  <input onclick="findProductById()" type="submit" values="Get Specific Product"> </input> -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.min.js"></script>
+  <script>
+    async function showAllProducts(){
+      const products = await axios.get('http://localhost:3000/admin/products');
+      console.log(products);
+      const productNode = document.getElementById('products');
+      products.data.forEach(product => {
+        const childelement = document.createElement('li');
+        childelement.innerHTML = product.title;
+        productNode.appendChild(childelement);     
+      }); 
+    } 
+  </script>
+
+</body>
+</html>
